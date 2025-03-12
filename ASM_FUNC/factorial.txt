@@ -1,0 +1,49 @@
+FACT:
+
+in
+pop rax
+
+push 1
+pop rbx
+
+push rax
+push 0
+jb :out_number_negative
+
+push rax
+int
+push rax
+jne :out_number_negative
+
+call :factorial
+push rbx
+out
+hlt
+
+factorial:
+    push rax
+    push 2
+    jb :ret
+
+    push rax
+    push rbx
+    mul
+    pop rbx
+
+    push rax
+    push 1
+    sub
+    pop rax
+
+    call :factorial
+    ret
+
+ret:
+    ret
+
+out_number_negative:
+    push -1
+    pop rbx
+    push rbx
+    out
+    hlt
